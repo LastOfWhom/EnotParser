@@ -18,7 +18,7 @@ class AuthStore extends ValidateController
 
     public function store(){
         $resultValue = $this->validateValue($_POST);
-        $this->chekLogin->check();
+        $this->chekLogin->check($resultValue, $this->db);
 
 //        $users = $this->db->select('users');
 //        var_dump($users);
