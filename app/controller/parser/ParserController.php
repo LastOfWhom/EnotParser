@@ -16,5 +16,6 @@ class ParserController
         foreach ($curse->Valute as $item) {
             echo $item->Name. ' '. $item->Value. '<br>';
         }
+
     }
 }

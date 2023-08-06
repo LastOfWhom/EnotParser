@@ -10,9 +10,33 @@
 </head>
 <body>
 <form class="box" action="" method="post">
-    <h1>Login</h1>
-    <input type="text" name="login" placeholder="login">
-    <input type="password" name="password" placeholder="password">
+    <h1>Register</h1>
+        <div>Введите логин</div>
+        <div>
+            <?php if(isset($_SESSION['login'])) :?>
+                <?php echo $_SESSION['login']; unset($_SESSION['login']); ?>
+            <?php endif?>
+            <input type="text" name="login" placeholder="login">
+        </div>
+
+
+        <div>Введите пароль</div>
+        <div>
+            <?php if(isset($_SESSION['password'])) :?>
+                <?php echo $_SESSION['password']; unset($_SESSION['password']); ?>
+            <?php endif?>
+            <input type="password" name="password" placeholder="password">
+        </div>
+
+
+        <div>Повторите пароль</div>
+        <div>
+            <input type="password" name="password_confirmation" placeholder="password">
+            <?php if(isset($_SESSION['password_confirmation'])) :?>
+                <?php echo $_SESSION['password_confirmation']; unset($_SESSION['password_confirmation']); ?>
+            <?php endif?>
+        </div>
+
     <input type="submit">
 
 </form>
