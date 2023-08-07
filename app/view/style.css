@@ -1,9 +1,9 @@
-body{
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    background: #34495e;
-}
+/*body{*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    font-family: sans-serif;*/
+/*    background: #34495e;*/
+/*}*/
 .box{
     width: 300px;
     padding: 40px;
@@ -66,3 +66,16 @@ body{
 .box button[type = "submit"]:hover{
     background: #2ecc71;
 }
+
+.container{
+    height: 100px;
+    width: 100px;
+    display: flex;
+    max-width: 300px!important;
+}
+.container h1{
+     height: 100px;
+     width: 100px;
+     display: flex;
+     max-width: 300px!important;
+ }
