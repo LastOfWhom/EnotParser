@@ -3,7 +3,7 @@
 namespace App\controller;
 
 
-class ValidateController extends Controller
+class ValidateController
 {
     public function validateValueRegister($password, $password_confirmation, $flag, $data)
     {

@@ -2,9 +2,11 @@
 
 namespace App\controller\auth;
 
-class RegisterController
+use App\controller\Controller;
+
+class RegisterController extends Controller
 {
     public function register(){
-        include 'register.php';
+        echo $this->templates->render('register');
     }
 }

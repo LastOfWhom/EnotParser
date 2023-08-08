@@ -32,7 +32,7 @@ class QueryBuyeldier
         $insert = $this->queryFactory->newInsert();
 
         $insert
-            ->into($table)             // insert into this table
+            ->into($table)
             ->cols($data);
         $sth = $this->db->prepare($insert->getStatement());
 
@@ -42,9 +42,9 @@ class QueryBuyeldier
         $update = $this->queryFactory->newUpdate();
 
         $update
-            ->table($table)                  // update this table
+            ->table($table)
             ->cols($data)
-            ->where('id =:id')
+            ->where('ID =:ID')
             ->bindValue('id',$id);
         $sth = $this->db->prepare($update->getStatement());
         $sth->execute($update->getBindValues());
@@ -52,9 +52,9 @@ class QueryBuyeldier
     public function delete($table, $id){
         $delete = $this->queryFactory->newDelete();
         $delete
-            ->from($table)                   // FROM this table
-            ->where('id =:id')           // AND WHERE these conditions
-            ->bindValue('id',$id); // bind one value to a placeholder
+            ->from($table)
+            ->where('id =:id')
+            ->bindValue('id',$id);
         $sth = $this->db->prepare($delete->getStatement());
 
         // execute with bound values

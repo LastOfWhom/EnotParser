@@ -20,10 +20,5 @@ class RegisterStore extends ValidateController
         $result = $this->validateValue($_POST);
         $this->db->insert('users',['login' => $result['login'], 'password' => password_hash($result['password'], PASSWORD_DEFAULT)]);
         header('Location: /login');
-
-
-
-
-
     }
 }

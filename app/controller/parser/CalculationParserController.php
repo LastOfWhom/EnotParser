@@ -5,25 +5,26 @@ namespace App\controller\parser;
 use App\controller\Controller;
 use App\controller\QueryBuyeldier;
 
-class StoreParserController extends Controller
+class CalculationParserController extends Controller
 {
-    private $db;
-    public function __construct(QueryBuyeldier $queryBuyeldier)
-    {
-        $this->db = $queryBuyeldier;
-    }
+    public function calculation($curses){
+        if($_POST){
+            $from = 0;
+            $to = 0;
+//            $curses = $this->db->select('curse');
+            foreach ($curses as $curse){
+                if($curse['CharCode'] == $_POST['from']){
+                    $from = $curse['Value'];
+                }
+                if($curse['CharCode'] == $_POST['to']){
+                    $to = $curse['Value'];
+                }
+            }
 
-    public function store()
-    {
-        var_dump($_POST);
-        die;
-        $file = file_get_contents('https://www.cbr-xml-daily.ru/daily_json.js?'.date('d/m/Y'));
-        $curse = json_decode($file);
-        foreach ($curse->Valute as $item) {
-            $this->db->insert('curse', ['ID' => $item->ID, 'NumCode' => $item->NumCode, 'CharCode' => $item->CharCode,
-                'Nominal' => $item->Nominal, 'Name' => $item->Name, 'Value' => $item->Value, 'Previous' => $item->Previous]);
+            $resultCurse = $from / $to * (float)($_POST['amount']);
+            return $resultCurse;
         }
-        echo 'Все загрузилось';
+
 
     }
 }

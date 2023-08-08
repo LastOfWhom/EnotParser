@@ -6,7 +6,7 @@ namespace App\controller\auth;
 use App\controller\QueryBuyeldier;
 use App\controller\ValidateController;
 
-class AuthStore extends ValidateController
+class AuthStoreController extends ValidateController
 {
     private $db;
     private $chekLogin;
@@ -20,7 +20,5 @@ class AuthStore extends ValidateController
         $resultValue = $this->validateValue($_POST);
         $this->chekLogin->check($resultValue, $this->db);
 
-//        $users = $this->db->select('users');
-//        var_dump($users);
     }
 }
