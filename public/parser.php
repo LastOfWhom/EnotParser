@@ -1,30 +1,41 @@
 <?php
 
-use App\controller\QueryBuyeldier;
+$pdo = new PDO('mysql:host=localhost;dbname=parser;charset=utf8;', 'root', '' );
 
-
-
-
-$db = new QueryBuyeldier;
-
-$currency = $this->db->select('Curse');
+$sql = 'SELECT * FROM curse';
+$statement = $pdo->prepare($sql);
+$statement->execute();
+$dbCurse = $statement->fetchAll(PDO::FETCH_ASSOC);
 $file = file_get_contents('https://www.cbr-xml-daily.ru/daily_json.js?');
 $curse = json_decode($file);
 
-
-if(!empty($currency)) {
-    foreach ($curse->Valute as $item) {
-
-        $this->db->update('Curse', ['ID' => $item->ID, 'NumCode' => $item->NumCode, 'CharCode' => 'DSDSDSD',
-            'Nominal' => $item->Nominal, 'Name' => $item->Name, 'Value' => $item->Value, 'Previous' => $item->Previous], $item->ID);
-    }
-}
-else {
+if(!empty($dbCurse) != 0){
 
     foreach ($curse->Valute as $item) {
-        $this->db->insert('Curse', ['ID' => $item->ID, 'NumCode' => $item->NumCode, 'CharCode' => $item->CharCode,
-            'Nominal' => $item->Nominal, 'Name' => $item->Name, 'Value' => $item->Value, 'Previous' => $item->Previous]);
+        $sql = "UPDATE Curse SET ID = '$item->ID', CharCode = '$item->CharCode', Nominal = '$item->Nominal',Name = '$item->Name', Value = '$item->Value', Previous = '$item->Previous'  
+        WHERE ID = '$item->ID' ";
+        $statement = $pdo->prepare($sql);
+        $statement->execute();
+        $curse = $statement->fetchAll(PDO::FETCH_ASSOC);
     }
-
 }
+else{
+    foreach ($curse->Valute as $item){
+        $sql = "INSERT INTO Curse (ID, NumCode, CharCode, Nominal, Name, Value, Previous) VALUES (:ID, :NumCode, :CharCode, :Nominal, :Name, :Value, :Previous)";
+        $statement = $pdo->prepare($sql);
+
+        $statement->bindParam(':ID', $item->ID);
+        $statement->bindParam(':NumCode', $item->NumCode);
+        $statement->bindParam(':CharCode', $item->CharCode);
+        $statement->bindParam(':Nominal', $item->Nominal);
+        $statement->bindParam(':Name', $item->Name);
+        $statement->bindParam(':Value', $item->Value);
+        $statement->bindParam(':Previous', $item->Previous);
+        $statement->execute();
+        $curse = $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
+$filename = date("Y-m-d H-i-s").'php';
+file_put_contents($filename, '');
+
 

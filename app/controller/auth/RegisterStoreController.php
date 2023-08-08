@@ -3,18 +3,11 @@
 namespace App\controller\auth;
 
 
-use App\controller\QueryBuyeldier;
+
 use App\controller\ValidateController;
 
-class RegisterStore extends ValidateController
+class RegisterStoreController extends ValidateController
 {
-    private $db;
-
-    public function __construct(QueryBuyeldier $queryBuyeldier)
-    {
-        $this->db = $queryBuyeldier;
-    }
-
     public function store()
     {
         $result = $this->validateValue($_POST);

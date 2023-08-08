@@ -3,7 +3,7 @@
 namespace App\controller\parser;
 
 use App\controller\Controller;
-use App\controller\QueryBuyeldier;
+
 
 class CalculationParserController extends Controller
 {
@@ -11,7 +11,6 @@ class CalculationParserController extends Controller
         if($_POST){
             $from = 0;
             $to = 0;
-//            $curses = $this->db->select('curse');
             foreach ($curses as $curse){
                 if($curse['CharCode'] == $_POST['from']){
                     $from = $curse['Value'];
@@ -21,9 +20,10 @@ class CalculationParserController extends Controller
                 }
             }
 
-            $resultCurse = $from / $to * (float)($_POST['amount']);
+            $resultCurse = $from / $to * (float) ($_POST['amount']);
             return $resultCurse;
         }
+
 
 
     }

@@ -2,10 +2,8 @@
 
 namespace App\controller\parser;
 
-use App\controller\Controller;
-use App\controller\QueryBuyeldier;
 use App\controller\SessionController;
-use League\Plates\Engine;
+
 
 class GetCurseController extends CalculationParserController
 {

@@ -46,9 +46,10 @@
                 </div>
                 <button type="submit" class="btn btn-primary mt-2">Submit</button>
             </form>
-            <?php if(isset($rate)) :?>
+            <?php if(isset($rate) && $_POST['from']) :?>
                 <div class="rate">
-                    Курс равен : <?php echo $rate ?>
+<!--                    --><?php //var_dump($rate);?>
+                    Курс <?php echo $_POST['from']; unset($_POST['from']); ?> равен : <?php echo $rate; unset($rate) ?>
                 </div>
             <?php endif;?>
         </div>

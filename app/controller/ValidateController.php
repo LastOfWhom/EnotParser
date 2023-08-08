@@ -3,7 +3,7 @@
 namespace App\controller;
 
 
-class ValidateController
+class ValidateController extends Controller
 {
     public function validateValueRegister($password, $password_confirmation, $flag, $data)
     {
@@ -43,6 +43,20 @@ class ValidateController
             die();
         }
         return $data;
+    }
+    public function check($data, $db)
+    {
+        $users = $db->select('users');
+        foreach ($users as $user) {
+            if ($user['login'] == $data['login'] && password_verify($data['password'], $user['password'])) {
+                SessionController::set('user', $user['login']);
+                header('Location: /index');
+                die;
+            }
+        }
+        SessionController::set('login', 'Неправильный логин или пароль');
+        header('Location: /login');
+        die;
     }
     private function clearData($val)
     {
