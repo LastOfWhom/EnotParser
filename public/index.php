@@ -1,9 +1,10 @@
 <?php
 session_start();
-require_once '../vendor/autoload.php';
+require_once dirname(__DIR__).'/vendor/autoload.php';
 
 use App\controller\route\RouteController;
 
+    RouteController::get('/', [App\controller\curse\CurseController::class, 'getCurse']);
     RouteController::get('/index', [App\controller\curse\CurseController::class, 'getCurse']);
     RouteController::post('/index', [App\controller\curse\CurseController::class, 'getCurse']);
     RouteController::get('/store', [App\controller\services\ParserService::class, 'store']);
