@@ -11,6 +11,6 @@ abstract class Controller
     public function __construct()
     {
         $this->db = new QueryBuyeldier();
-        $this->templates = new Engine('../app/view');
+        $this->templates = new Engine(dirname(__DIR__).'/view');
     }
 }

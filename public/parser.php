@@ -6,7 +6,7 @@ $sql = 'SELECT * FROM curse';
 $statement = $pdo->prepare($sql);
 $statement->execute();
 $dbCurse = $statement->fetchAll(PDO::FETCH_ASSOC);
-$file = file_get_contents('https://www.cbr-xml-daily.ru/daily_json.js?');
+$file = file_get_contents('https://www.cbr-xml-daily.ru/daily_json.js');
 $curse = json_decode($file);
 
 if(!empty($dbCurse) != 0){
@@ -25,7 +25,7 @@ else{
         $statement = $pdo->prepare($sql);
 
         $statement->bindParam(':ID', $item->ID);
-        $statement->bindParam(':NumCode', $item->NumCode);
+        $statement->bindParam(':Num Code', $item->NumCode);
         $statement->bindParam(':CharCode', $item->CharCode);
         $statement->bindParam(':Nominal', $item->Nominal);
         $statement->bindParam(':Name', $item->Name);
@@ -35,7 +35,6 @@ else{
         $curse = $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }
-$filename = date("Y-m-d H-i-s").'php';
-file_put_contents($filename, '');
+
 
 

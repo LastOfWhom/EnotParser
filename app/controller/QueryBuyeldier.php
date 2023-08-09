@@ -11,7 +11,8 @@ class QueryBuyeldier
     protected $db;
     public function __construct()
     {
-        $this->db = new PDO("mysql:host=mysql;host=localhost;dbname=parser", "root", "");
+        $config = require_once(dirname(__DIR__) . '/config/config.php');
+        $this->db = new PDO("{$config['connect']};dbname={$config['db']};",$config['username'],$config['password']);
         $this->queryFactory = new QueryFactory('mysql');
     }
 

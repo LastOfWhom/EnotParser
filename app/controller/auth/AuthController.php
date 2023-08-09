@@ -1,10 +1,30 @@
 <?php
 
-namespace App\controller;
+namespace App\controller\auth;
 
 
-class ValidateController extends Controller
+
+use App\controller\Controller;
+use App\controller\SessionController;
+
+class AuthController extends Controller
 {
+    public function loginStore(){
+        $resultValue = $this->validateValue($_POST);
+        $this->check($resultValue, $this->db);
+    }
+    public function getLogin(){
+        echo $this->templates->render('login');
+    }
+    public function register(){
+        echo $this->templates->render('register');
+    }
+    public function registerStore()
+    {
+        $result = $this->validateValue($_POST);
+        $this->db->insert('users',['login' => $result['login'], 'password' => password_hash($result['password'], PASSWORD_DEFAULT)]);
+        header('Location: /login');
+    }
     public function validateValueRegister($password, $password_confirmation, $flag, $data)
     {
 
@@ -19,6 +39,7 @@ class ValidateController extends Controller
         $_SESSION['success'] = 'Регистрация прошла успешно';
         return $data;
     }
+
     public function validateValue($data)
     {
         $login = $this->clearData($data['login']);
@@ -66,5 +87,4 @@ class ValidateController extends Controller
         $val = htmlspecialchars($val);
         return $val;
     }
-
 }
